@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/styles.scss';
 import {App} from "./App";
+import 'css-paint-polyfill';
+CSS.paintWorklet.addModule(new URL('./scfBorder.js', import.meta.url));
 
 
 ReactDOM.render(
