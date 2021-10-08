@@ -1,10 +1,11 @@
-@import "./vars.scss";
-@import "./borderblocks.scss";
 
 body {
   padding: 50px;
   margin: 0;
   background-color: #0e0e15;
+  color: #ddd;
+
+
   background-image: linear-gradient(rgba(68, 76, 247, 0.03) 2px, transparent 2px),
   linear-gradient(90deg, rgba(68, 76, 247, 0.03) 2px, transparent 2px),
   linear-gradient(rgba(68, 76, 247, 0.03) 1px, transparent 1px),
@@ -12,25 +13,67 @@ body {
   background-size: 42px 42px, 42px 42px, 21px 21px, 21px 21px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 
-  color: #ddd;
-}
 
-
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
-
-
-
-  & .content {
-
-    &--left {
-    }
-
-    &--right {
-    }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
   }
+
+  --border-h: 15%;
+  --border-v: 15%;
+  --cool-border-blue: #69e9ff;
+
+  .block {
+    &__leftmain {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 20px 10px 20px 60px;
+
+      --scfborder-top-left: var(--border-v) var(--border-h);
+      --scfborder-top-right: 20;
+      --scfborder-bottom-right: 20;
+      --scfborder-bottom-left: var(--border-v) var(--border-h);
+      --scfborder-width: 3px;
+      --scfborder-shadow-color: var(--cool-border-blue);
+      --scfborder-border-color: var(--cool-border-blue);
+      --scfborder-pattern-shift: 0px 50px;
+      --scfborder-top-dent: 10px;
+      --scfborder-top-dent-length: 33%;
+
+      background-image: paint(scfborder);
+    }
+
+    &__rightmain {
+      margin-left: 20px;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+
+      --scfborder-top-left: 20;
+      --scfborder-top-right: var(--border-v) var(--border-h);
+      --scfborder-bottom-right: var(--border-v) var(--border-h);
+      --scfborder-bottom-left: 20;
+      --scfborder-width: 3px;
+      --scfborder-shadow-color: var(--cool-border-blue);
+      --scfborder-border-color: var(--cool-border-blue);
+      --scfborder-pattern-shift: 0 -50;
+      --scfborder-top-dent: 10px;
+      --scfborder-top-dent-length: 33%;
+
+      background-image: paint(scfborder);
+    }
+
+  }
+
 }
+
+
+
 
 

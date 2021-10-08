@@ -1,16 +1,20 @@
 {
+  "name": "css-scf-border",
+  "author": "HolyMarcell <tristan.doehl@holy-mail.de>",
+  "homepage": "https://holymarcell.github.com/css-scf-border",
+  "license": "MIT",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "css-paint-polyfill": "^3.3.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-spring": "^9.2.5"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.2.0",

@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/styles.scss';
 import {App} from "./App";
-CSS.paintWorklet.addModule(new URL('./scfBorder.js', import.meta.url));
-
 
 
 ReactDOM.render(
