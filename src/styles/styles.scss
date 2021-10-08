@@ -1,0 +1,36 @@
+@import "./vars.scss";
+@import "./borderblocks.scss";
+
+body {
+  padding: 50px;
+  margin: 0;
+  background-color: #0e0e15;
+  background-image: linear-gradient(rgba(68, 76, 247, 0.03) 2px, transparent 2px),
+  linear-gradient(90deg, rgba(68, 76, 247, 0.03) 2px, transparent 2px),
+  linear-gradient(rgba(68, 76, 247, 0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(68, 76, 247, 0.03) 1px, transparent 1px);
+  background-size: 42px 42px, 42px 42px, 21px 21px, 21px 21px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+
+  color: #ddd;
+}
+
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+
+
+
+  & .content {
+
+    &--left {
+    }
+
+    &--right {
+    }
+  }
+}
+
+
