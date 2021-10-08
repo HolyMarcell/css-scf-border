@@ -19,20 +19,24 @@ body {
     -2px -2px,
     -1px -1px,
     -1px -1px;
-  --border-h: 15%;
-  --border-v: 15%;
+  --border-h: 70px;
+  --border-v: 90px;
   --cool-border-blue: #69e9ff;
 }
 body .layout {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+body .demo {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
+  grid-column-gap: 20px;
 }
 body .block__leftmain {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 20px 10px 20px 60px;
+  padding: 20px 20px 20px 60px;
   --scfborder-top-left: var(--border-v) var(--border-h);
   --scfborder-top-right: 20;
   --scfborder-bottom-right: 20;
@@ -46,7 +50,6 @@ body .block__leftmain {
   background-image: paint(scfborder);
 }
 body .block__rightmain {
-  margin-left: 20px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;

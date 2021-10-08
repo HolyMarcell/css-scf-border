@@ -7023,15 +7023,48 @@ var RightMain = ({children}) => {
   }, children);
 };
 
-// build/dist/Layout.js
-var Layout = () => {
+// build/dist/Demo.js
+var Demo = () => {
   return /* @__PURE__ */ react.createElement("div", {
-    className: "layout"
-  }, /* @__PURE__ */ react.createElement("div", {
+    className: "demo"
+  }, /* @__PURE__ */ react.createElement("h2", null, "Demo"), /* @__PURE__ */ react.createElement("div", null), /* @__PURE__ */ react.createElement("div", {
     className: "content--left"
   }, /* @__PURE__ */ react.createElement(LeftMain, null, /* @__PURE__ */ react.createElement("h2", null, "Hello World, the SCF Border"), /* @__PURE__ */ react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corporis cumque dolore doloremque doloribus id ipsum maiores odio quam, quo quos ratione sapiente similique soluta tempora tenetur vel voluptas voluptates?"), /* @__PURE__ */ react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corporis cumque dolore doloremque doloribus id ipsum maiores odio quam, quo quos ratione sapiente similique soluta tempora tenetur vel voluptas voluptates?"), /* @__PURE__ */ react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corporis cumque dolore doloremque doloribus id ipsum maiores odio quam, quo quos ratione sapiente similique soluta tempora tenetur vel voluptas voluptates?"))), /* @__PURE__ */ react.createElement("div", {
     className: "content--right"
   }, /* @__PURE__ */ react.createElement(RightMain, null, /* @__PURE__ */ react.createElement("h1", null, "Foo, the bar foo baz?"))));
+};
+
+// build/dist/Intro.js
+var Intro = () => {
+  return /* @__PURE__ */ react.createElement("div", {
+    className: "into"
+  }, /* @__PURE__ */ react.createElement("h2", null, "css-scf-border"), /* @__PURE__ */ react.createElement("div", {
+    className: "content"
+  }, /* @__PURE__ */ react.createElement("p", null, "A css houdini paintWorklet to create these beveled borders in CSS. See ", /* @__PURE__ */ react.createElement("a", {
+    href: "https://github.com/w3c/css-houdini-drafts/blob/main/css-paint-api/EXPLAINER.md",
+    target: "_blank"
+  }, "https://github.com/w3c/css-houdini-drafts/blob/main/css-paint-api/EXPLAINER.md"), "for mor details on Houdinis css-paint-api."), /* @__PURE__ */ react.createElement("p", null, "For supported Browsers check: ", /* @__PURE__ */ react.createElement("a", {
+    href: "https://ishoudinireadyyet.com/",
+    target: "_blank"
+  }, "https://ishoudinireadyyet.com/"), "A Polyfill for Firefox exists, but is slow and somewhat unreliable.")));
+};
+
+// build/dist/Explanation.js
+var Explanation = () => {
+  return /* @__PURE__ */ react.createElement("div", {
+    className: "demo"
+  }, /* @__PURE__ */ react.createElement("div", {
+    className: "content--left"
+  }, /* @__PURE__ */ react.createElement("pre", null, "&__leftmain {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  padding: 20px 20px 20px 60px;\n\n  --scfborder-top-left: 20px 70px;\n  --scfborder-top-right: 20;\n  --scfborder-bottom-right: 20;\n  --scfborder-bottom-left: 20px 70px;\n  --scfborder-width: 3px;\n  --scfborder-shadow-color: #69e9ff;\n  --scfborder-border-color: #69e9ff;\n  --scfborder-pattern-shift: 0px 50px;\n  --scfborder-top-dent: 10px;\n  --scfborder-top-dent-length: 33%;\n\n  background-image: paint(scfborder);\n}")), /* @__PURE__ */ react.createElement("div", {
+    className: "content--right"
+  }, /* @__PURE__ */ react.createElement("pre", null, "    &__rightmain {\n      width: 100%;\n      height: 100%;\n      box-sizing: border-box;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n\n\n      --scfborder-top-left: 20;\n      --scfborder-top-right: 20px 70px;\n      --scfborder-bottom-right: 20px 70px;\n      --scfborder-bottom-left: 20;\n      --scfborder-width: 3px;\n      --scfborder-shadow-color: #69e9ff;\n      --scfborder-border-color: #69e9ff;\n      --scfborder-pattern-shift: 0 -50;\n      --scfborder-top-dent: 10px;\n      --scfborder-top-dent-length: 33%;\n\n      background-image: paint(scfborder);\n    }")));
+};
+
+// build/dist/Layout.js
+var Layout = () => {
+  return /* @__PURE__ */ react.createElement("div", {
+    className: "layout"
+  }, /* @__PURE__ */ react.createElement(Intro, null), /* @__PURE__ */ react.createElement(Demo, null), /* @__PURE__ */ react.createElement(Explanation, null));
 };
 
 // build/dist/App.js
@@ -7039,8 +7072,513 @@ var App = () => {
   return /* @__PURE__ */ react.createElement(Layout, null);
 };
 
+// build/_snowpack/pkg/css-paint-polyfill.js
+!function() {
+  function e(e2, t2) {
+    var n2 = new XMLHttpRequest();
+    n2.onreadystatechange = function() {
+      n2.readyState === 4 && t2(n2.responseText);
+    }, n2.open("GET", e2, true), n2.send();
+  }
+  function t(e2, t2, n2) {
+    Object.defineProperty ? Object.defineProperty(e2, t2, n2) : e2[t2] = n2.get();
+  }
+  var n, r = window.CSS;
+  r || (window.CSS = r = {}), r.supports || (r.supports = function e2(t2, n2) {
+    if (t2 == "paint")
+      return true;
+    if (n2) {
+      var r2 = u.contentDocument.body;
+      return r2.style.cssText = t2 + ":" + n2, r2.style.cssText.length > 0;
+    }
+    for (var i2, o2, a2, s2, l2 = /(^|not|(or)|(and))\s*\(\s*(.+?)\s*:(.+?)\)\s*|(.)/gi; a2 = l2.exec(t2); ) {
+      if (a2[6])
+        return false;
+      s2 = e2(a2[4], a2[5]), o2 = a2[2] ? o2 || s2 : a2[3] ? o2 && s2 : (i2 = !a2[1], s2);
+    }
+    return o2 == i2;
+  }), r.escape || (r.escape = function(e2) {
+    return e2.replace(/([^\w-])/g, "\\$1");
+  });
+  var i = {};
+  function o(e2, t2) {
+    var n2 = parseFloat(e2);
+    this.value = isNaN(n2) ? e2 : n2, this.unit = t2;
+  }
+  r.registerProperty || (r.registerProperty = function(e2) {
+    i[e2.name] = e2;
+  }), o.prototype.toString = function() {
+    return this.value + (this.unit == "number" ? "" : this.unit);
+  }, o.prototype.valueOf = function() {
+    return this.value;
+  }, "Hz Q ch cm deg dpcm dpi ddpx em ex fr grad in kHz mm ms number pc percent pt px rad rem s turn vh vmax vmin vw".split(" ").forEach(function(e2) {
+    r[e2] || (r[e2] = function(t2) {
+      return new o(t2, e2);
+    });
+  });
+  var a = /(background|mask|cursor|-image|-source)/, s = !!r.paintWorklet;
+  s || (n = new ie2(), t(r, "paintWorklet", {enumerable: true, configurable: true, get: function() {
+    return n;
+  }}));
+  var l = "css-paint-polyfill", c = document.createElement(l);
+  s || document.documentElement.appendChild(c);
+  var u = document.createElement("iframe");
+  u.style.cssText = "position:absolute; left:0; top:-999px; width:1px; height:1px;", c.appendChild(u);
+  var p = document.createElement("style");
+  p.id = l, p.$$isPaint = true, c.appendChild(p);
+  var d = p.sheet, f = c.style, v = false, h = [], m = /(paint\(|-moz-element\(#paint-|-webkit-canvas\(paint-|[('"]blob:[^'"#]+#paint=|[('"]data:image\/paint-)/, g = "getCSSCanvasContext" in document, y2 = (f.backgroundImage = "-moz-element(#" + l + ")") === f.backgroundImage, $ = typeof Promise == "function";
+  f.cssText = "display:none !important;";
+  var b = window.requestAnimationFrame || setTimeout, w = function() {
+    return window.devicePixelRatio || 1;
+  }, P2 = {}, x = {}, R2 = 0;
+  function S2(e2) {
+    var t2 = e2.bit ^= 1;
+    return e2.instances[t2] || (e2.instances[t2] = new e2.Painter());
+  }
+  function O2(e2, t2) {
+    var n2 = e2.cssText, r2 = m.test(n2);
+    if (t2.isNew === true && r2 && n2 !== (n2 = z(n2)) && (e2 = function(e3, t3) {
+      for (var n3 = e3.parentStyleSheet, r3 = e3.parentRule, i3 = (r3 || n3).cssRules, o3 = i3.length - 1, a3 = 0; a3 <= o3; a3++)
+        if (i3[a3] === e3) {
+          (r3 || n3).deleteRule(a3), o3 = a3;
+          break;
+        }
+      if (t3 != null) {
+        if (r3) {
+          var s3 = r3.appendRule(t3);
+          return r3.cssRules[s3];
+        }
+        return n3.insertRule(t3, o3), n3.cssRules[o3];
+      }
+    }(e2, n2)), r2) {
+      var i2, o2, a2, s2 = e2.selectorText, l2 = B2(e2.style);
+      if (i2 = t2.counters[s2] == null ? t2.counters[s2] = 1 : ++t2.counters[s2], x[o2 = "sheet" + t2.sheetId + "\n" + s2 + "\n" + i2] != null) {
+        if ((a2 = x[o2]).selector === s2)
+          return a2.rule = e2, void (a2.cssText !== l2 && t2.toProcess.push(a2));
+        t2.toRemove.push(a2);
+      } else
+        a2 = x[o2] = {key: o2, selector: s2, cssText: l2, properties: {}, rule: e2}, t2.toProcess.push(a2.selector);
+    }
+  }
+  function C(e2, t2) {
+    if (!("ownerSVGElement" in e2)) {
+      t2(e2);
+      for (var n2 = e2.firstElementChild; n2; )
+        C(n2, t2), n2 = n2.nextElementSibling;
+    }
+  }
+  function T2() {
+    for (var e2, t2 = [].slice.call(document.styleSheets), n2 = {toProcess: [], toRemove: [], counters: {}, isNew: false, sheetId: null, rules: null}, r2 = 0; r2 < t2.length; r2++) {
+      var i2 = t2[r2].ownerNode;
+      if (!i2.$$isPaint) {
+        try {
+          n2.rules = i2.sheet.cssRules;
+        } catch (e3) {
+          continue;
+        }
+        if (n2.sheetId = i2.$$paintid, n2.isNew = n2.sheetId == null, n2.isNew) {
+          if (n2.sheetId = i2.$$paintid = ++R2, k(i2) === false)
+            continue;
+          e2 = true;
+        }
+        E(i2.sheet, O2, n2);
+      }
+    }
+    for (var o2 = n2.toRemove.length; o2--; )
+      delete x[n2.toRemove[o2].key];
+    n2.toProcess.length > 0 && F2(n2.toProcess.join(", ")), e2 && F2("[data-css-paint]", true);
+  }
+  function E(t2, n2, r2) {
+    var i2 = [[0, t2.cssRules]], o2 = i2[0], a2 = o2[1];
+    if (a2)
+      for (var s2 = 0; i2.length > 0; s2++)
+        if (s2 >= a2.length) {
+          i2.pop();
+          var l2 = i2.length;
+          l2 > 0 && (a2 = (o2 = i2[l2 - 1])[1], s2 = o2[0]);
+        } else {
+          o2[0] = s2;
+          var c2 = a2[s2];
+          if (c2.type !== 3)
+            if (c2.type === 1) {
+              var u2 = n2(c2, r2);
+              u2 !== void 0 && (r2 = u2);
+            } else
+              c2.cssRules && c2.cssRules.length > 0 && i2.push([0, c2.cssRules]);
+          else {
+            if (c2.$$isPaint)
+              continue;
+            var p2 = c2.media && c2.media.mediaText;
+            if (p2 && !self.matchMedia(p2).matches)
+              continue;
+            if (/ts\.g.{7}is\.com\/css/.test(c2.href))
+              continue;
+            c2.$$isPaint = true, e(c2.href, N2);
+          }
+        }
+    return r2;
+  }
+  function k(t2) {
+    if (!t2.$$isPaint) {
+      if (t2.href)
+        return e(t2.href, N2), false;
+      for (var n2 = t2.childNodes.length; n2--; ) {
+        var r2 = t2.childNodes[n2].nodeValue, i2 = z(r2);
+        i2 !== r2 && (t2.childNodes[n2].nodeValue = i2);
+      }
+    }
+  }
+  function N2(e2) {
+    var t2 = function(e3) {
+      var t3 = u.contentDocument.body, n3 = document.createElement("style");
+      return n3.media = "print", n3.$$paintid = ++R2, n3.appendChild(document.createTextNode(e3)), t3.appendChild(n3), n3.sheet.remove = function() {
+        return t3.removeChild(n3);
+      }, n3.sheet;
+    }(z(e2));
+    try {
+      t2._ = t2.cssRules.length;
+    } catch (e3) {
+      var n2 = function() {
+        t2 && G2(t2), t2 = null, clearTimeout(r2);
+      };
+      t2.ownerNode.onload = t2.ownerNode.onerror = n2;
+      var r2 = setTimeout(n2, 5e3);
+      return;
+    }
+    G2(t2);
+  }
+  function G2(e2) {
+    var t2 = "";
+    if (E(e2, function(e3) {
+      if (e3.type === 1) {
+        for (var n3 = "", r2 = 0; r2 < e3.style.length; r2++) {
+          var i2 = e3.style.item(r2), o2 = e3.style.getPropertyValue(i2);
+          m.test(o2) && (n3 = i2 + ": " + o2 + e3.style.getPropertyPriority(i2) + ";");
+        }
+        if (n3) {
+          n3 = e3.selectorText + "{" + n3 + "}";
+          for (var a2 = e3; a2 = a2.parentRule; )
+            n3 = "" + a2.cssText.match(/^[\s\S]+?\{/)[0] + n3 + "}";
+          t2 += n3;
+        }
+      }
+    }), e2.remove(), t2) {
+      var n2 = document.createElement("style");
+      n2.appendChild(document.createTextNode(t2)), c.appendChild(n2), T2();
+    }
+  }
+  function z(e2) {
+    return e2.replace(/(;|,|\b)paint\s*\(\s*(['"]?)(.+?)\2\s*\)(;|,|!|\b|$)/g, "$1url(data:image/paint-$3,=)$4");
+  }
+  var V2, D2, L, j = [];
+  function A(e2, t2) {
+    t2 && (e2.$$paintObservedProperties = null, e2.$$paintGeometry && !e2.$$paintGeometry.live && (e2.$$paintGeometry = null)), e2.$$paintPending !== true && (e2.$$paintPending = true, j.indexOf(e2) === -1 && j.push(e2) === 1 && b(I2));
+  }
+  function I2() {
+    for (var e2, t2 = 0; t2 < j.length; t2++)
+      j[t2] && j[t2].localName === "style" && (e2 = true, j[t2] = null);
+    if (e2)
+      return b(I2), void T2();
+    var n2 = j.length && j.some(function(e3) {
+      return e3 && e3.$$needsOverrides === true;
+    });
+    for (n2 && K(); j.length; ) {
+      var r2 = j.pop();
+      r2 && W2(r2);
+    }
+    n2 && Y2();
+  }
+  function F2(e2, t2) {
+    try {
+      for (var n2 = document.querySelectorAll(e2), r2 = 0; r2 < n2.length; r2++)
+        A(n2[r2], t2);
+    } catch (e3) {
+    }
+  }
+  function M2(e2, t2, n2) {
+    for (var r2 = e2.length, i2 = function() {
+      --r2 || t2.apply(null, n2 || h);
+    }, o2 = 0; o2 < e2.length; o2++) {
+      var a2 = new Image();
+      a2.onload = i2, a2.onerror = onerror, a2.src = e2[o2];
+    }
+  }
+  function H2(e2) {
+    var t2 = e2.$$paintId;
+    return t2 == null && (t2 = e2.$$paintId = ++Z2), t2;
+  }
+  function U2(e2) {
+    var t2 = e2.$$paintRule, n2 = H2(e2);
+    if (Number(e2.getAttribute("data-css-paint")) !== n2 && e2.setAttribute("data-css-paint", n2), t2 == null) {
+      var r2 = d.insertRule('[data-css-paint="' + n2 + '"] {}', d.cssRules.length);
+      t2 = e2.$$paintRule = d.cssRules[r2];
+    }
+    return t2;
+  }
+  function B2(e2) {
+    var t2 = e2.cssText;
+    if (t2)
+      return t2;
+    t2 = "";
+    for (var n2 = 0, r2 = void 0; n2 < e2.length; n2++)
+      r2 = e2[n2], n2 !== 0 && (t2 += " "), t2 += r2, t2 += ":", t2 += e2.getPropertyValue(r2), t2 += ";";
+    return t2;
+  }
+  function W2(e2) {
+    var t2 = getComputedStyle(e2);
+    if (e2.$$paintObservedProperties && !e2.$$needsOverrides)
+      for (var n2 = 0; n2 < e2.$$paintObservedProperties.length; n2++) {
+        var r2 = e2.$$paintObservedProperties[n2];
+        if (t2.getPropertyValue(r2).trim() !== e2.$$paintedPropertyValues[r2]) {
+          _(e2, t2);
+          break;
+        }
+      }
+    else if (e2.$$paintId || m.test(B2(t2)))
+      _(e2, t2);
+    else {
+      var i2 = e2.getAttribute("style");
+      m.test(i2) && (e2.style.cssText = i2.replace(/;\s*$/, "") + "; " + e2.style.cssText, _(e2));
+    }
+    e2.$$paintPending = false;
+  }
+  function q(e2) {
+    e2.$$paintGeometry && !e2.$$paintGeometry.live && (e2.$$paintGeometry = null), A(e2);
+  }
+  var Q = {get: function(e2) {
+    var t2 = i[e2], n2 = t2 && t2.inherits === false ? D2.style.getPropertyValue(e2) : Q.getRaw(e2);
+    if (n2 == null && t2)
+      n2 = t2.initialValue;
+    else if (t2 && t2.syntax) {
+      var o2 = t2.syntax.replace(/[<>\s]/g, "");
+      typeof r[o2] == "function" && (n2 = r[o2](n2));
+    }
+    return typeof n2 == "string" && (n2 = n2.trim()), n2;
+  }, getRaw: function(e2) {
+    if (e2 in L)
+      return L[e2];
+    var t2 = V2.getPropertyValue(e2);
+    return typeof t2 == "string" && (t2 = t2.trim()), L[e2] = t2;
+  }};
+  var X2 = window.ResizeObserver && new window.ResizeObserver(function(e2) {
+    for (var t2 = 0; t2 < e2.length; t2++) {
+      var n2 = e2[t2], r2 = n2.target.$$paintGeometry;
+      r2 ? r2.live = true : r2 = n2.target.$$paintGeometry = {width: 0, height: 0, live: true};
+      var i2 = n2.borderBoxSize;
+      if (i2 && i2.length && (i2 = i2[0]), i2)
+        r2.width = 0 | i2.inlineSize, r2.height = 0 | i2.blockSize;
+      else {
+        var o2 = getComputedStyle(n2.target), a2 = parseFloat(o2.paddingLeft) + parseFloat(o2.paddingRight), s2 = parseFloat(o2.paddingTop) + parseFloat(o2.paddingBottom);
+        r2.width = Math.round((n2.contentRect.right - n2.contentRect.left || n2.contentRect.width) + a2), r2.height = Math.round((n2.contentRect.bottom - n2.contentRect.top || n2.contentRect.height) + s2);
+      }
+      A(n2.target, true);
+    }
+  });
+  var Z2 = 0;
+  function _(e2, t2) {
+    e2.$$needsOverrides === true && K();
+    var n2, r2 = V2 = t2 == null ? getComputedStyle(e2) : t2;
+    D2 = e2, L = {};
+    var i2 = [];
+    e2.$$paintPending = false;
+    var o2 = function(e3) {
+      return e3.$$paintGeometry || (e3.$$paintGeometry = {width: e3.clientWidth, height: e3.clientHeight, live: false});
+    }(e2);
+    !function(e3) {
+      X2 && !e3.$$paintGeometry.live && (e3.$$paintGeometry.live = true, X2.observe(e3));
+    }(e2), o2 = {width: o2.width, height: o2.height};
+    for (var s2 = w(), l2 = e2.$$paintedProperties, u2 = 0; u2 < r2.length; u2++) {
+      var p2 = r2[u2], d2 = Q.getRaw(p2), f2 = /(,|\b|^)(?:url\((['"]?))?((?:-moz-element\(#|-webkit-canvas\()paint-\d+-([^;,]+)|(?:data:image\/paint-|blob:[^'"#]+#paint=)([^"';, ]+)(?:[;,].*?)?)\2\)(;|,|\s|\b|$)/g, v2 = "", h2 = 0, m2 = [], $2 = false, b2 = false, x2 = void 0, R3 = void 0, O3 = false, C2 = o2;
+      if (a.test(p2) && p2 !== "-webkit-border-image") {
+        if (/border-image/.test(p2)) {
+          var T3 = C2.width, E2 = C2.height, k2 = re2(Q.getRaw("border-image-slice").replace(/\sfill/, "").split(" ")), N3 = re2(Q.getRaw("border-width").split(" ")), G3 = re2(Q.getRaw("border-image-outset").split(" "));
+          T3 += ne2(k2.left != "0" && parseFloat(N3.left) || 0, G3.left || 0, true), T3 += ne2(k2.right != "0" && parseFloat(N3.right) || 0, G3.right || 0, true), E2 += ne2(k2.top != "0" && parseFloat(N3.top) || 0, G3.top || 0, true), O3 = true, C2 = {width: T3, height: E2 += ne2(k2.bottom != "0" && parseFloat(N3.bottom) || 0, G3.bottom || 0, true)};
+        }
+        for (; R3 = f2.exec(d2); ) {
+          b2 === false && (x2 = H2(e2)), b2 = true, v2 += d2.substring(0, R3.index);
+          var z2 = R3[4] || R3[5], j2 = R3[3], A2 = P2[z2], I3 = A2 && A2.Painter.contextOptions || {}, F3 = O3 || I3.scaling === false ? 1 : s2, B3 = void 0;
+          A2 && (A2.Painter.inputProperties && i2.push.apply(i2, A2.Painter.inputProperties), B3 = S2(A2)), I3.nativePixels === true && (C2.width *= s2, C2.height *= s2, F3 = 1);
+          var W3 = F3 * C2.width, q2 = F3 * C2.height, Z3 = e2.$$paintContext, _2 = "paint-" + x2 + "-" + z2, J2 = Z3 && Z3.canvas;
+          if (!J2 || J2.width != W3 || J2.height != q2 || g === true && Z3 && _2 !== Z3.id) {
+            if (g === true)
+              (Z3 = document.getCSSCanvasContext("2d", _2, W3, q2)).id = _2, e2.$$paintContext && Z3.clearRect(0, 0, W3, q2);
+            else {
+              var ie3 = false;
+              J2 || ((J2 = document.createElement("canvas")).id = _2, ie3 = y2), J2.width = W3, J2.height = q2, ie3 && (J2.style.display = "none", c.appendChild(J2)), Z3 = J2.getContext("2d");
+            }
+            e2.$$paintContext = Z3, Z3.imageSmoothingEnabled = false, F3 !== 1 && Z3.scale(F3, F3);
+          } else
+            Z3.clearRect(0, 0, W3, q2);
+          if (B3 && (Z3.save(), Z3.beginPath(), B3.paint(Z3, C2, Q), Z3.closePath(), Z3.restore(), g === false && !y2 && "resetTransform" in Z3 && Z3.resetTransform()), v2 += R3[1], g === true)
+            v2 += "-webkit-canvas(" + _2 + ")", (R3[4] == null || J2 && J2.id !== _2) && ($2 = true);
+          else if (y2 === true)
+            v2 += "-moz-element(#" + _2 + ")", R3[4] == null && ($2 = true), J2 && J2.id !== _2 && (J2.id = _2, $2 = true);
+          else {
+            var oe2 = J2.toDataURL("image/png").replace("/png", "/paint-" + z2);
+            if (typeof MSBlobBuilder == "function" && (oe2 = ee2(oe2, z2)), m2.push(oe2), v2 += 'url("' + oe2 + '")', oe2 !== j2 || !n2) {
+              var ae2 = j2 ? j2.indexOf("#") : -1;
+              ~ae2 && URL.revokeObjectURL(j2.substring(0, ae2)), $2 = true;
+            }
+            j2 = oe2;
+          }
+          v2 += R3[6], h2 = R3.index + R3[0].length;
+        }
+        b2 !== false || l2 == null || l2[p2] == null ? (v2 += d2.substring(h2), $2 && (n2 || (n2 = U2(e2)), l2 == null && (l2 = e2.$$paintedProperties = {}), l2[p2] = true, p2.substring(0, 10) === "background" && s2 !== 1 && te2(n2.style, "background-size", "100% 100%"), /mask/.test(p2) && s2 !== 1 && (te2(n2.style, "mask-size", "contain"), g && te2(n2.style, "-webkit-mask-size", "contain")), /border-image/.test(p2) && g && (te2(n2.style, "border-color", "initial"), te2(n2.style, "image-rendering", "optimizeSpeed")), m2.length === 0 ? te2(n2.style, p2, v2) : M2(m2, te2, [n2.style, p2, v2]))) : (n2 || (n2 = U2(e2)), n2.style.removeProperty(p2), X2 && X2.unobserve(e2), e2.$$paintGeometry && (e2.$$paintGeometry.live = false));
+      }
+    }
+    e2.$$paintObservedProperties = i2.length === 0 ? null : i2;
+    for (var se2 = e2.$$paintedPropertyValues = {}, le2 = 0; le2 < i2.length; le2++) {
+      var ce2 = i2[le2];
+      se2[ce2] = Q.getRaw(ce2);
+    }
+    e2.$$needsOverrides === true && Y2(), e2.$$needsOverrides = null;
+  }
+  var J = 0;
+  function K() {
+    J++ || (p.disabled = true);
+  }
+  function Y2() {
+    --J || (p.disabled = false);
+  }
+  function ee2(e2, t2) {
+    for (var n2 = atob(e2.split(",")[1]), r2 = new Uint8Array(n2.length), i2 = 0; i2 < n2.length; i2++)
+      r2[i2] = n2.charCodeAt(i2);
+    return URL.createObjectURL(new Blob([r2])) + "#paint=" + t2;
+  }
+  function te2(e2, t2, n2) {
+    var r2 = v;
+    v = true, e2.setProperty(t2, n2, "important"), v = r2;
+  }
+  function ne2(e2, t2, n2) {
+    var r2 = n2 ? 0 : e2, i2 = parseFloat(t2);
+    return t2 ? t2.match("px") ? r2 + i2 : (t2.match("%") && (i2 /= 100), e2 * i2) : r2;
+  }
+  function re2(e2) {
+    return {top: e2[0], bottom: e2[2] || e2[0], left: e2[3] || e2[1] || e2[0], right: e2[1] || e2[0]};
+  }
+  function ie2() {
+  }
+  if (ie2.prototype.addModule = function(n2) {
+    var r2, i2, o2 = this;
+    return $ && (r2 = new Promise(function(e2) {
+      return i2 = e2;
+    })), e(n2, function(e2) {
+      var n3 = {registerPaint: function(e3, t2) {
+        !function(e4, t3, n4) {
+          P2[e4] = {worklet: n4, Painter: t3, properties: t3.inputProperties ? [].slice.call(t3.inputProperties) : [], bit: 0, instances: []};
+          for (var r4 = "", i3 = d.cssRules.length; i3--; ) {
+            var o3 = d.cssRules[i3];
+            o3.style.cssText.indexOf("-" + e4) !== -1 && (r4 += o3.selectorText);
+          }
+          r4 && F2(r4, true);
+        }(e3, t2, {context: n3, realm: r3});
+      }};
+      t(n3, "devicePixelRatio", {get: w}), n3.self = n3;
+      var r3 = new function(e3, t2) {
+        var n4 = document.createElement("iframe");
+        n4.style.cssText = "position:absolute; left:0; top:-999px; width:1px; height:1px;", t2.appendChild(n4);
+        var r4 = n4.contentWindow, i3 = r4.document, o3 = "var window,$hook";
+        for (var a2 in r4)
+          a2 in e3 || a2 === "eval" || (o3 += ",", o3 += a2);
+        for (var s2 in e3)
+          o3 += ",", o3 += s2, o3 += "=self.", o3 += s2;
+        var l2 = i3.createElement("script");
+        l2.appendChild(i3.createTextNode('function $hook(self,console) {"use strict";\n		' + o3 + ";return function() {return eval(arguments[0])}}")), i3.body.appendChild(l2), this.exec = r4.$hook(e3, console);
+      }(n3, u.contentDocument && u.contentDocument.body || c);
+      e2 = (o2.transpile || String)(e2), r3.exec(e2), i2 && i2();
+    }), r2;
+  }, !s)
+    try {
+      !function() {
+        var e2 = false;
+        new MutationObserver(function(t2) {
+          if (e2 !== true && !J) {
+            e2 = true;
+            for (var n3 = 0; n3 < t2.length; n3++) {
+              var r3 = t2[n3], i3 = r3.target, o3 = void 0, a2 = void 0;
+              if (!(i3 && "ownerSVGElement" in i3)) {
+                if (r3.type === "childList") {
+                  if (o3 = r3.addedNodes)
+                    for (var s3 = 0; s3 < o3.length; s3++)
+                      o3[s3].nodeType === 1 && C(o3[s3], A);
+                  if (a2 = r3.removedNodes)
+                    for (var l3 = 0; l3 < a2.length; l3++)
+                      X2 && a2[l3].$$paintGeometry && (a2[l3].$$paintGeometry.live = false, X2 && X2.unobserve(a2[l3]));
+                } else if (r3.type === "attributes" && i3.nodeType === 1) {
+                  if (r3.attributeName === "data-css-paint" && r3.oldValue && i3.$$paintId != null && !i3.getAttribute("data-css-paint")) {
+                    H2(i3);
+                    continue;
+                  }
+                  C(i3, q);
+                }
+              }
+            }
+            e2 = false;
+          }
+        }).observe(document.body, {childList: true, attributes: true, attributeOldValue: true, subtree: true});
+        var n2 = Object.getOwnPropertyDescriptor(Element.prototype, "setAttribute"), r2 = n2.value;
+        n2.value = function(e3, t2) {
+          return e3 === "style" && m.test(t2) && (t2 = z(t2), H2(this), this.$$needsOverrides = true, q(this)), r2.call(this, e3, t2);
+        }, t(Element.prototype, "setAttribute", n2);
+        var i2 = Object.getOwnPropertyDescriptor(Element.prototype, "removeAttribute"), o2 = i2.value;
+        i2.value = function(e3) {
+          if (e3 !== "data-css-paint")
+            return o2.call(this, e3);
+        }, t(Element.prototype, "removeAttribute", i2);
+        var s2 = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "style"), l2 = s2.get;
+        s2.set = function(e3) {
+          return s2.get.call(this).cssText = e3;
+        }, s2.get = function() {
+          var e3 = l2.call(this);
+          return e3.ownerElement !== this && t(e3, "ownerElement", {value: this}), e3;
+        }, t(HTMLElement.prototype, "style", s2);
+        var c2 = {}, u2 = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, "cssText"), p2 = u2.set;
+        u2.set = function(e3) {
+          if (!J && m.test(e3)) {
+            e3 = e3 && z(e3);
+            var t2 = this.ownerElement;
+            t2 && (H2(t2), t2.$$needsOverrides = true, q(t2));
+          }
+          return p2.call(this, e3);
+        }, c2.cssText = u2, Object.keys((window.CSS2Properties || CSSStyleDeclaration).prototype).filter(function(e3) {
+          return a.test(e3);
+        }).forEach(function(e3) {
+          var t2 = e3.replace(/([A-Z])/g, "-$1").toLowerCase();
+          c2[e3] = {configurable: true, enumerable: true, get: function() {
+            var e4 = this.getPropertyPriority(t2);
+            return this.getPropertyValue(t2) + (e4 ? " !" + e4 : "");
+          }, set: function(n3) {
+            var r3 = String(n3).match(/^(.*?)\s*(?:!\s*(important)\s*)?$/);
+            return this.setProperty(t2, r3[1], r3[2]), this[e3];
+          }};
+        });
+        var d2 = Object.getOwnPropertyDescriptor(CSSStyleDeclaration.prototype, "setProperty"), f2 = d2.value;
+        d2.value = function(e3, t2, n3) {
+          if (!v && !J && m.test(t2)) {
+            t2 = t2 && z(t2);
+            var r3 = this.ownerElement;
+            r3 && (H2(r3), r3.$$needsOverrides = true, q(r3));
+          }
+          f2.call(this, e3, t2, n3);
+        }, c2.setProperty = d2, Object.defineProperties(CSSStyleDeclaration.prototype, c2), window.CSS2Properties && Object.defineProperties(window.CSS2Properties.prototype, c2), addEventListener("resize", function() {
+          F2("[data-css-paint]");
+        });
+        var h2 = {passive: true};
+        function g2(e3) {
+          for (var t2 = e3.target; t2; )
+            t2.nodeType === 1 && A(t2), t2 = t2.parentNode;
+        }
+        ["animationiteration", "animationend", "animationstart", "transitionstart", "transitionend", "transitionrun", "transitioncancel", "mouseover", "mouseout", "mousedown", "mouseup", "focus", "blur"].forEach(function(e3) {
+          addEventListener(e3, g2, h2);
+        }), T2();
+      }();
+    } catch (e2) {
+    }
+}();
+
 // build/dist/index.js
 import.meta.env = env_exports;
+CSS.paintWorklet.addModule(new URL("./scfBorder.js", import.meta.url));
 react_dom_default.render(/* @__PURE__ */ react.createElement(react.StrictMode, null, /* @__PURE__ */ react.createElement(App, null)), document.getElementById("root"));
 if (void 0) {
   (void 0).accept();

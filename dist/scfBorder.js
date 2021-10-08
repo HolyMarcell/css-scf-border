@@ -140,7 +140,7 @@ class ScfBorder {
             if (value.split(' ').length === 1) {
                 return {
                     ...acc,
-                    [varName]: {v: normalizeCssValue(value, canvasWidth), h: normalizeCssValue(value, canvasHeight)}
+                    [varName]: {v: normalizeCssValue(value, canvasHeight), h: normalizeCssValue(value, canvasWidth)}
                 }
             }
 
@@ -148,7 +148,7 @@ class ScfBorder {
                 const [v, h] = value.split(' ');
                 return {
                     ...acc,
-                    [varName]: {v: normalizeCssValue(v, canvasWidth), h: normalizeCssValue(h, canvasHeight)}
+                    [varName]: {v: normalizeCssValue(v, canvasHeight), h: normalizeCssValue(h, canvasWidth)}
                 }
             }
 
@@ -210,6 +210,7 @@ class ScfBorder {
             patternSize,
             shadowColor,
         } = pp;
+
 
         // Draw first borderpath inset for 1/2 of borderWidth, so clipping does not cut the border off
         const widthClipOffset = borderWidth / 2;
