@@ -13,12 +13,17 @@ body {
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 
 
-
   .layout {
-    max-width: 900px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+  }
+
+
+  .demo {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 0 auto;
+    grid-column-gap: 20px;
   }
 
   --border-h: 70px;
@@ -30,7 +35,7 @@ body {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      padding: 20px 10px 20px 60px;
+      padding: 20px 20px 20px 60px;
 
       --scfborder-top-left: var(--border-v) var(--border-h);
       --scfborder-top-right: 20;
@@ -47,7 +52,6 @@ body {
     }
 
     &__rightmain {
-      margin-left: 20px;
       width: 100%;
       height: 100%;
       box-sizing: border-box;
