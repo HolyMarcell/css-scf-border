@@ -1,25 +1,26 @@
-# New Project
+# @holymarcell/css-scf-border
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+A custom beveled border implemented with the CSS Paint worklet api.
 
-## Available Scripts
+## demo
 
-### npm start
+See: https://holymarcell.github.com/css-scf-border
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+## usage:
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+Simple: (Not currently supported with Firefox)
 
-### npm run build
+```
+if ('paintWorklet' in CSS) {
+  CSS.paintWorklet.addModule('"https://unpkg.com/@holymarcell/css-scf-border@0.1.1/src/scfBorder.js');
+}
+```
 
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
+In React (with snowpack): Copy the source over to your workdir and use this in your index.tsx
 
-**For the best production performance:** Add a build bundler plugin like "@snowpack/plugin-webpack" to your `snowpack.config.mjs` config file.
+The Polyfill makes this css feature work in firefox.
+```
+import 'css-paint-polyfill';
+CSS.paintWorklet.addModule(new URL('./scfBorder.js', import.meta.url));
 
-### npm test
-
-Launches the application test runner.
-Run with the `--watch` flag (`npm test -- --watch`) to run in interactive watch mode.
+```

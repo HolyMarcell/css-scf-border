@@ -1,8 +1,9 @@
 .idea
-.build.
+build
 node_modules
 public
-src
+src/**/**.*
+src/**
 types
 .gitignore
 .git
