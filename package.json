@@ -1,9 +1,9 @@
 {
   "name": "@holymarcell/css-scf-border",
   "author": "HolyMarcell <tristan.doehl@holy-mail.de>",
-  "homepage": "https://holymarcell.github.com/css-scf-border",
+  "homepage": "https://holymarcell.github.io/css-scf-border/",
   "repository": "https://github.com/HolyMarcell/css-scf-border",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "scripts": {
     "start": "snowpack dev",

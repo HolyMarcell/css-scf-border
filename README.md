@@ -4,7 +4,7 @@ A custom beveled border implemented with the CSS Paint worklet api.
 
 ## demo
 
-See: https://holymarcell.github.com/css-scf-border
+See: https://holymarcell.github.io/css-scf-border/
 
 ## usage:
 
