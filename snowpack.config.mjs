@@ -1,7 +1,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
   mount: {
-    public: { url: '/css-scf-border', static: true },
+    public: { url: '/', static: true },
     src: { url: '/dist' },
   },
   plugins: [
@@ -25,6 +25,6 @@ export default {
     open: 'none'
   },
   buildOptions: {
-    /* ... */
+    baseUrl: "/css-scf-border"
   },
 };
