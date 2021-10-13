@@ -57,6 +57,7 @@ class ScfBorder {
         '--scfborder-border-color',
         '--scfborder-shadow-color',
         '--scfborder-pattern-size',
+        '--scfborder-pattern-color',
         '--scfborder-top-dent',
         '--scfborder-top-dent-length',
     ];
@@ -79,6 +80,7 @@ class ScfBorder {
         patternSize: 20,
         borderColor: '#00f',
         shadowColor: '#00f',
+        patternColor: '#00f',
         topDent: 0,
         topDentLength: 0,
     }
@@ -209,6 +211,7 @@ class ScfBorder {
             borderColor,
             patternSize,
             shadowColor,
+            patternColor
         } = pp;
 
 
@@ -242,7 +245,7 @@ class ScfBorder {
             (size.width / 2) + patternShift.h, (size.height / 2) + patternShift.v, Math.max(size.width, size.height)
         );
         hexaGrad.addColorStop(0, 'transparent');
-        hexaGrad.addColorStop(1, borderColor);
+        hexaGrad.addColorStop(1, patternColor);
 
         ctx.fillStyle = hexaGrad;
         ctx.lineWidth = 1;
