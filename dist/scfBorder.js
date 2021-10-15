@@ -6,7 +6,7 @@
  */
 const normalizeCssValue = (strVal, maxVal = null) => {
     // If non-numeric value return the string:
-    if(isNaN(parseInt(strVal.slice(0, 1))) && strVal.slice(0,1) !== '-') {
+    if (isNaN(parseInt(strVal.slice(0, 1))) && strVal.slice(0, 1) !== '-') {
         return strVal;
     }
 
@@ -57,6 +57,7 @@ class ScfBorder {
         '--scfborder-border-color',
         '--scfborder-shadow-color',
         '--scfborder-pattern-size',
+        '--scfborder-pattern-color',
         '--scfborder-top-dent',
         '--scfborder-top-dent-length',
     ];
@@ -79,41 +80,9 @@ class ScfBorder {
         patternSize: 20,
         borderColor: '#00f',
         shadowColor: '#00f',
+        patternColor: '#00f',
         topDent: 0,
         topDentLength: 0,
-    }
-
-    borderPath(size, {topLeft, topRight, bottomRight, bottomLeft, offset, topDent, topDentLength}) {
-        const {width: canvasWidth, height: canvasHeight} = size;
-        const borderPath = new Path2D();
-        // Top Left
-
-        borderPath.moveTo(offset, offset + topLeft.v);
-        !(topLeft.h === 0 && topLeft.v === 0) && borderPath.lineTo(offset + topLeft.h, offset);
-
-
-        // Top Dent
-        const straight = canvasWidth - topLeft.h - topRight.h;
-        const half = (straight - topDentLength) / 2
-        borderPath.lineTo(-offset + topLeft.h + half, offset);
-        borderPath.lineTo(-offset + topLeft.h + half + topDent, offset + topDent);
-        borderPath.lineTo(offset + topLeft.h + half + topDentLength + topDent, offset + topDent);
-        borderPath.lineTo(offset + topLeft.h + half + topDentLength + topDent + topDent, offset);
-
-        // Top Right
-        borderPath.lineTo(-offset + canvasWidth - topRight.h, offset);
-        !(topRight.h === 0 && topRight.v === 0) && borderPath.lineTo(canvasWidth - offset, topRight.v + offset);
-
-        // Bottom Right
-        borderPath.lineTo(canvasWidth - offset, canvasHeight - bottomRight.v - offset);
-        !(bottomRight.h === 0 && bottomRight.v === 0) && borderPath.lineTo(canvasWidth - bottomRight.h - offset, canvasHeight - offset);
-
-        // bottom Left
-        borderPath.lineTo(bottomLeft.h + offset, canvasHeight - offset);
-        !(bottomLeft.h === 0 && bottomLeft.v === 0) && borderPath.lineTo(offset, canvasHeight - bottomLeft.v - offset)
-
-        borderPath.closePath();
-        return borderPath;
     }
 
     parseProps(ctx, size, props) {
@@ -201,6 +170,47 @@ class ScfBorder {
         ctx.closePath();
     }
 
+    borderPath(size, {topLeft, topRight, bottomRight, bottomLeft, topDent, topDentLength}) {
+        const {width: canvasWidth, height: canvasHeight} = size;
+        const borderPath = new Path2D();
+
+
+        // Offset Top/Bot/Left/Rigtht effectively decreases canvasSize by the amount that the corner is "outside" the "box"
+        const insetTop = (Math.min(topLeft.v, topRight.v) < 0) ? Math.abs(Math.min(topLeft.v, topRight.v)) : 0;
+        const insetBot = (Math.min(bottomLeft.v, bottomRight.v) < 0) ? Math.abs(Math.min(bottomLeft.v, bottomRight.v)) : 0;
+        const insetRight = (Math.min(topRight.h, bottomRight.h) < 0) ? Math.abs(Math.min(topRight.h, bottomRight.h)) : 0;
+        const insetLeft = (Math.min(topLeft.h, bottomLeft.h) < 0) ? Math.abs(Math.min(topLeft.h, bottomLeft.h)) : 0;
+
+        // Top Left
+
+        borderPath.moveTo(insetLeft, insetTop + topLeft.v);
+        !(topLeft.h === 0 && topLeft.v === 0) && borderPath.lineTo(topLeft.h + insetLeft, insetTop);
+
+
+        // Top Dent
+        const straight = canvasWidth - topLeft.h - topRight.h;
+        const half = (straight - topDentLength) / 2
+        borderPath.lineTo(topLeft.h + half, insetTop);
+        borderPath.lineTo(topLeft.h + half + topDent, insetTop + topDent);
+        borderPath.lineTo(topLeft.h + half + topDentLength + topDent, insetTop + topDent);
+        borderPath.lineTo(topLeft.h + half + topDentLength + topDent + topDent, insetTop);
+
+        // Top Right
+        borderPath.lineTo(canvasWidth - topRight.h - insetRight, insetTop);
+        !(topRight.h === 0 && topRight.v === 0) && borderPath.lineTo(canvasWidth - insetRight, topRight.v + insetTop);
+
+        // Bottom Right
+        borderPath.lineTo(canvasWidth - insetRight, canvasHeight - bottomRight.v - insetBot);
+        !(bottomRight.h === 0 && bottomRight.v === 0) && borderPath.lineTo(canvasWidth - bottomRight.h - insetRight, canvasHeight - insetBot);
+
+        // bottom Left
+        borderPath.lineTo(bottomLeft.h + insetLeft, canvasHeight - insetBot);
+        !(bottomLeft.h === 0 && bottomLeft.v === 0) && borderPath.lineTo(insetLeft, canvasHeight - bottomLeft.v - insetBot)
+
+        borderPath.closePath();
+        return borderPath;
+    }
+
     paint(ctx, size, props) {
         const pp = this.parseProps(ctx, size, props);
         const {
@@ -209,22 +219,20 @@ class ScfBorder {
             borderColor,
             patternSize,
             shadowColor,
+            patternColor
         } = pp;
 
 
-        // Draw first borderpath inset for 1/2 of borderWidth, so clipping does not cut the border off
-        const widthClipOffset = borderWidth / 2;
-
         // prepare outline
-        const borderPath = this.borderPath(size, {...pp, offset: widthClipOffset});
+        const borderPath = this.borderPath(size, {...pp});
 
         // Prepare clipping outline, that removes patterns & shadows that leak "outside" of the border
-        const clipBorderPath = this.borderPath(size, {...pp, offset: 0});
+        const clipBorderPath = this.borderPath(size, {...pp});
 
 
         ctx.clip(clipBorderPath); // clip = define the "inside" to be the only place to be drawn on
         ctx.lineJoin = 'bevel'; // Slight smoothing of corners
-        ctx.lineWidth = borderWidth;
+        ctx.lineWidth = borderWidth * 2; // Double, because 1/2 gets clipped
         ctx.strokeStyle = borderColor;
 
         ctx.shadowColor = shadowColor;
@@ -242,7 +250,7 @@ class ScfBorder {
             (size.width / 2) + patternShift.h, (size.height / 2) + patternShift.v, Math.max(size.width, size.height)
         );
         hexaGrad.addColorStop(0, 'transparent');
-        hexaGrad.addColorStop(1, borderColor);
+        hexaGrad.addColorStop(1, patternColor);
 
         ctx.fillStyle = hexaGrad;
         ctx.lineWidth = 1;
