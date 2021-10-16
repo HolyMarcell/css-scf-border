@@ -3,7 +3,7 @@
   "author": "HolyMarcell <tristan.doehl@holy-mail.de>",
   "homepage": "https://holymarcell.github.io/css-scf-border/",
   "repository": "https://github.com/HolyMarcell/css-scf-border",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "scripts": {
     "start": "snowpack dev",
@@ -11,7 +11,10 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "release:patch": "node release.js patch",
+    "release:minor": "node release.js minor",
+    "release:major": "node release.js major"
   },
   "dependencies": {
     "css-paint-polyfill": "^3.3.0",
