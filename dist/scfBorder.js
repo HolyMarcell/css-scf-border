@@ -60,6 +60,8 @@ class ScfBorder {
         '--scfborder-pattern-color',
         '--scfborder-top-dent',
         '--scfborder-top-dent-length',
+        '--scfborder-bottom-dent',
+        '--scfborder-bottom-dent-length',
     ];
 
     static get inputProperties() {
@@ -82,7 +84,9 @@ class ScfBorder {
         shadowColor: '#00f',
         patternColor: '#00f',
         topDent: 0,
+        bottomDent: 0,
         topDentLength: 0,
+        bottomDentLength: 0,
     }
 
     parseProps(ctx, size, props) {
@@ -170,7 +174,16 @@ class ScfBorder {
         ctx.closePath();
     }
 
-    borderPath(size, {topLeft, topRight, bottomRight, bottomLeft, topDent, topDentLength}) {
+    borderPath(size, {
+        topLeft,
+        topRight,
+        bottomRight,
+        bottomLeft,
+        topDent,
+        bottomDent,
+        topDentLength,
+        bottomDentLength
+    }) {
         const {width: canvasWidth, height: canvasHeight} = size;
         const borderPath = new Path2D();
 
@@ -188,12 +201,12 @@ class ScfBorder {
 
 
         // Top Dent
-        const straight = canvasWidth - topLeft.h - topRight.h;
-        const half = (straight - topDentLength) / 2
-        borderPath.lineTo(topLeft.h + half, insetTop);
-        borderPath.lineTo(topLeft.h + half + topDent, insetTop + topDent);
-        borderPath.lineTo(topLeft.h + half + topDentLength + topDent, insetTop + topDent);
-        borderPath.lineTo(topLeft.h + half + topDentLength + topDent + topDent, insetTop);
+        const straightTopDent = canvasWidth - topLeft.h - topRight.h;
+        const halfTopDent = (straightTopDent - topDentLength) / 2
+        borderPath.lineTo(topLeft.h + halfTopDent - Math.abs(topDent), insetTop);
+        borderPath.lineTo(topLeft.h + halfTopDent, insetTop + topDent);
+        borderPath.lineTo(topLeft.h + halfTopDent + topDentLength, insetTop + topDent);
+        borderPath.lineTo(topLeft.h + halfTopDent + topDentLength + Math.abs(topDent), insetTop);
 
         // Top Right
         borderPath.lineTo(canvasWidth - topRight.h - insetRight, insetTop);
@@ -203,9 +216,19 @@ class ScfBorder {
         borderPath.lineTo(canvasWidth - insetRight, canvasHeight - bottomRight.v - insetBot);
         !(bottomRight.h === 0 && bottomRight.v === 0) && borderPath.lineTo(canvasWidth - bottomRight.h - insetRight, canvasHeight - insetBot);
 
+        // Bottom Dent
+        const straightBotDent = canvasWidth - bottomLeft.h - bottomRight.h;
+        const halfBotDent = (straightBotDent - bottomDentLength) / 2;
+        borderPath.lineTo(bottomLeft.h + bottomDentLength + halfBotDent + Math.abs(bottomDent), canvasHeight - insetBot);
+        borderPath.lineTo(bottomLeft.h + bottomDentLength + halfBotDent, canvasHeight - insetBot - bottomDent);
+        borderPath.lineTo(bottomLeft.h + halfBotDent, canvasHeight - insetBot - bottomDent);
+        borderPath.lineTo(bottomLeft.h + halfBotDent - Math.abs(bottomDent), canvasHeight - insetBot);
+
+
         // bottom Left
         borderPath.lineTo(bottomLeft.h + insetLeft, canvasHeight - insetBot);
         !(bottomLeft.h === 0 && bottomLeft.v === 0) && borderPath.lineTo(insetLeft, canvasHeight - bottomLeft.v - insetBot)
+
 
         borderPath.closePath();
         return borderPath;
