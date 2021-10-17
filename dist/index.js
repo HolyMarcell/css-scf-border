@@ -7025,28 +7025,28 @@ var RightMain = ({children}) => {
 
 // build/dist/Demo.js
 var Demo = () => {
-  return /* @__PURE__ */ react.createElement("div", {
+  return /* @__PURE__ */ react.createElement(react.Fragment, null, /* @__PURE__ */ react.createElement("div", {
+    className: "content"
+  }, /* @__PURE__ */ react.createElement("h2", null, "Demo")), /* @__PURE__ */ react.createElement("div", {
     className: "demo"
-  }, /* @__PURE__ */ react.createElement("h2", null, "Demo"), /* @__PURE__ */ react.createElement("div", null), /* @__PURE__ */ react.createElement("div", {
+  }, /* @__PURE__ */ react.createElement("div", {
     className: "content--left"
   }, /* @__PURE__ */ react.createElement(LeftMain, null, /* @__PURE__ */ react.createElement("h2", null, "Hello World, the SCF Border"), /* @__PURE__ */ react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corporis cumque dolore doloremque doloribus id ipsum maiores odio quam, quo quos ratione sapiente similique soluta tempora tenetur vel voluptas voluptates?"), /* @__PURE__ */ react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corporis cumque dolore doloremque doloribus id ipsum maiores odio quam, quo quos ratione sapiente similique soluta tempora tenetur vel voluptas voluptates?"), /* @__PURE__ */ react.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corporis cumque dolore doloremque doloribus id ipsum maiores odio quam, quo quos ratione sapiente similique soluta tempora tenetur vel voluptas voluptates?"))), /* @__PURE__ */ react.createElement("div", {
     className: "content--right"
-  }, /* @__PURE__ */ react.createElement(RightMain, null, /* @__PURE__ */ react.createElement("h1", null, "Foo, the bar foo baz?"))));
+  }, /* @__PURE__ */ react.createElement(RightMain, null, /* @__PURE__ */ react.createElement("h1", null, "Foo, the bar foo baz?")))));
 };
 
 // build/dist/Intro.js
 var Intro = () => {
   return /* @__PURE__ */ react.createElement("div", {
-    className: "into"
-  }, /* @__PURE__ */ react.createElement("h2", null, "css-scf-border"), /* @__PURE__ */ react.createElement("div", {
     className: "content"
-  }, /* @__PURE__ */ react.createElement("p", null, "A css houdini paintWorklet to create these beveled borders in CSS. See ", /* @__PURE__ */ react.createElement("a", {
+  }, /* @__PURE__ */ react.createElement("h2", null, "About"), /* @__PURE__ */ react.createElement("p", null, "A css houdini paintWorklet to create these beveled borders in CSS. See ", /* @__PURE__ */ react.createElement("br", null), /* @__PURE__ */ react.createElement("a", {
     href: "https://github.com/w3c/css-houdini-drafts/blob/main/css-paint-api/EXPLAINER.md",
     target: "_blank"
-  }, "https://github.com/w3c/css-houdini-drafts/blob/main/css-paint-api/EXPLAINER.md"), "for mor details on Houdinis css-paint-api."), /* @__PURE__ */ react.createElement("p", null, "For supported Browsers check: ", /* @__PURE__ */ react.createElement("a", {
+  }, "https://github.com/w3c/css-houdini-drafts/blob/main/css-paint-api/EXPLAINER.md"), " ", /* @__PURE__ */ react.createElement("br", null), "for mor details on Houdinis css-paint-api."), /* @__PURE__ */ react.createElement("p", null, "For supported Browsers check: ", /* @__PURE__ */ react.createElement("a", {
     href: "https://ishoudinireadyyet.com/",
     target: "_blank"
-  }, "https://ishoudinireadyyet.com/"), "A Polyfill for Firefox exists, but is slow and somewhat unreliable.")));
+  }, "https://ishoudinireadyyet.com/"), "A Polyfill for Firefox exists, but is slow and somewhat unreliable."));
 };
 
 // build/dist/Explanation.js
@@ -7055,16 +7055,41 @@ var Explanation = () => {
     className: "demo"
   }, /* @__PURE__ */ react.createElement("div", {
     className: "content--left"
-  }, /* @__PURE__ */ react.createElement("pre", null, "&__leftmain {\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  padding: 20px 20px 20px 60px;\n\n  --scfborder-top-left: 20px 70px;\n  --scfborder-top-right: 20;\n  --scfborder-bottom-right: 20;\n  --scfborder-bottom-left: 20px 70px;\n  --scfborder-width: 3px;\n  --scfborder-shadow-color: #69e9ff;\n  --scfborder-border-color: #69e9ff;\n  --scfborder-pattern-shift: 0px 50px;\n  --scfborder-top-dent: 10px;\n  --scfborder-top-dent-length: 33%;\n\n  background-image: paint(scfborder);\n}")), /* @__PURE__ */ react.createElement("div", {
+  }, /* @__PURE__ */ react.createElement("pre", null, "&__leftmain {\n\n  --scfborder-top-left: 20px 70px;\n  --scfborder-top-right: 20;\n  --scfborder-bottom-right: 20;\n  --scfborder-bottom-left: 20px 70px;\n  --scfborder-width: 3px;\n  --scfborder-shadow-color: #69e9ff;\n  --scfborder-border-color: #69e9ff;\n  --scfborder-pattern-shift: 0px 50px;\n  --scfborder-top-dent: 10px;\n  --scfborder-top-dent-length: 33%;\n\n  background-image: paint(scfborder);\n}")), /* @__PURE__ */ react.createElement("div", {
     className: "content--right"
-  }, /* @__PURE__ */ react.createElement("pre", null, "    &__rightmain {\n      width: 100%;\n      height: 100%;\n      box-sizing: border-box;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n\n\n      --scfborder-top-left: 20;\n      --scfborder-top-right: 20px 70px;\n      --scfborder-bottom-right: 20px 70px;\n      --scfborder-bottom-left: 20;\n      --scfborder-width: 3px;\n      --scfborder-shadow-color: #69e9ff;\n      --scfborder-border-color: #69e9ff;\n      --scfborder-pattern-shift: 0 -50;\n      --scfborder-top-dent: 10px;\n      --scfborder-top-dent-length: 33%;\n\n      background-image: paint(scfborder);\n    }")));
+  }, /* @__PURE__ */ react.createElement("pre", null, "    &__rightmain {\n\n      --scfborder-top-left: 20;\n      --scfborder-top-right: 20px 70px;\n      --scfborder-bottom-right: 20px 70px;\n      --scfborder-bottom-left: 20;\n      --scfborder-width: 3px;\n      --scfborder-shadow-color: #69e9ff;\n      --scfborder-border-color: #69e9ff;\n      --scfborder-pattern-shift: 0 -50;\n      --scfborder-top-dent: 10px;\n      --scfborder-top-dent-length: 33%;\n\n      background-image: paint(scfborder);\n    }")));
+};
+
+// build/dist/TopBar.js
+var TopBar = () => {
+  return /* @__PURE__ */ react.createElement("div", {
+    className: "topbar"
+  }, /* @__PURE__ */ react.createElement("h1", null, "@holymarcell/css-scf-border"));
+};
+
+// build/dist/Api.js
+var Api = () => {
+  const foo = [
+    "--scfborder-width",
+    "--scfborder-border-color",
+    "--scfborder-shadow-color",
+    "--scfborder-pattern-size",
+    "--scfborder-pattern-color",
+    "--scfborder-top-dent",
+    "--scfborder-top-dent-length",
+    "--scfborder-bottom-dent",
+    "--scfborder-bottom-dent-length"
+  ];
+  return /* @__PURE__ */ react.createElement("div", {
+    className: "content"
+  }, /* @__PURE__ */ react.createElement("h2", null, "Api"), /* @__PURE__ */ react.createElement("h4", null, "Properties with two values"), /* @__PURE__ */ react.createElement("p", null, 'These Properties accept up to two values, either as plain number (interpreted as pixel values) as pixel value (e.g. "42px") or as percentage. Percentages are calculated relative to the height or width of the container depending on context. If you set ', /* @__PURE__ */ react.createElement("em", null, "--scfborder-top-left"), ' to "50% 50%" the top left border will be inset at 45° on a 100px times 100px container, but look diffrently on a container that is 100px times 200px large.'), /* @__PURE__ */ react.createElement("p", null, "Each of these properties also accepts a single value, that then is applied twice."), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-top-left"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-top-right"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-bottom-right"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-bottom-left"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-pattern-shift"), /* @__PURE__ */ react.createElement("h4", null, "Properties with one value"), /* @__PURE__ */ react.createElement("p", null, `These properties accept one value. Properties ending in "color" will accept any way of declaring colors in css e.g. #f1f1f1 or 'hotpink'.`), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-width"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-border-color"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-shadow-color"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-pattern-size"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-pattern-color"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-top-dent"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-top-dent-length"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-bottom-dent"), /* @__PURE__ */ react.createElement("pre", null, "--scfborder-bottom-dent-length"));
 };
 
 // build/dist/Layout.js
 var Layout = () => {
-  return /* @__PURE__ */ react.createElement("div", {
+  return /* @__PURE__ */ react.createElement(react.Fragment, null, /* @__PURE__ */ react.createElement(TopBar, null), /* @__PURE__ */ react.createElement("div", {
     className: "layout"
-  }, /* @__PURE__ */ react.createElement(Intro, null), /* @__PURE__ */ react.createElement(Demo, null), /* @__PURE__ */ react.createElement(Explanation, null));
+  }, /* @__PURE__ */ react.createElement(Intro, null), /* @__PURE__ */ react.createElement(Demo, null), /* @__PURE__ */ react.createElement(Explanation, null), /* @__PURE__ */ react.createElement(Api, null)));
 };
 
 // build/dist/App.js

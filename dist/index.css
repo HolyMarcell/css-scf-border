@@ -1,9 +1,9 @@
 /* build/dist/styles/styles.css */
 body {
-  padding: 50px;
   margin: 0;
-  background-color: #0e0e15;
-  color: #ddd;
+  padding: 0;
+  background-color: #d6d6da;
+  color: #111;
   background-image:
     linear-gradient(rgba(68, 76, 247, 0.03) 2px, transparent 2px),
     linear-gradient(90deg, rgba(68, 76, 247, 0.03) 2px, transparent 2px),
@@ -21,16 +21,34 @@ body {
     -1px -1px;
   --border-h: 70px;
   --border-v: 90px;
-  --cool-border-blue: #69e9ff;
+}
+body h2 {
+  border-bottom: 1px solid #333;
+}
+body .topbar {
+  background-color: #122223;
+  color: #fff;
+  padding: 15px;
+}
+body .topbar h1 {
+  font-family: monospace;
+  text-align: center;
+}
+body .content {
+  max-width: 600px;
 }
 body .layout {
   max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 70px;
 }
 body .demo {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 20px;
+  padding: 40px 30px;
+  border: 2px solid #111;
+  background-color: #ddd;
 }
 body .block__leftmain {
   width: 100%;
@@ -42,11 +60,14 @@ body .block__leftmain {
   --scfborder-bottom-right: 20;
   --scfborder-bottom-left: var(--border-v) var(--border-h);
   --scfborder-width: 3px;
-  --scfborder-shadow-color: var(--cool-border-blue);
-  --scfborder-border-color: var(--cool-border-blue);
+  --scfborder-shadow-color: #122223;
+  --scfborder-border-color: #122223;
+  --scfborder-pattern-color: #12222333;
   --scfborder-pattern-shift: 0px 50px;
   --scfborder-top-dent: 10px;
   --scfborder-top-dent-length: 33%;
+  --scfborder-bottom-dent: 10px;
+  --scfborder-bottom-dent-length: 20%;
   background-image: paint(scfborder);
 }
 body .block__rightmain {
@@ -61,10 +82,13 @@ body .block__rightmain {
   --scfborder-bottom-right: var(--border-v) var(--border-h);
   --scfborder-bottom-left: 20;
   --scfborder-width: 3px;
-  --scfborder-shadow-color: var(--cool-border-blue);
-  --scfborder-border-color: var(--cool-border-blue);
+  --scfborder-shadow-color: #122223;
+  --scfborder-border-color: #122223;
+  --scfborder-pattern-color: #12222333;
   --scfborder-pattern-shift: 0 -50;
   --scfborder-top-dent: 10px;
   --scfborder-top-dent-length: 33%;
+  --scfborder-bottom-dent: 10px;
+  --scfborder-bottom-dent-length: 20%;
   background-image: paint(scfborder);
 }

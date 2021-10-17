@@ -110,21 +110,22 @@ class ScfBorder {
                 }
             }
 
-            if (value.split(' ').length === 1) {
+            const vals = value.split(/\s+/);
+
+            if (vals.length === 1) {
                 return {
                     ...acc,
                     [varName]: {v: normalizeCssValue(value, canvasHeight), h: normalizeCssValue(value, canvasWidth)}
                 }
             }
 
-            if (value.split(' ').length === 2) {
-                const [v, h] = value.split(' ');
+            if (vals.length === 2) {
+                const [v, h] = vals;
                 return {
                     ...acc,
                     [varName]: {v: normalizeCssValue(v, canvasHeight), h: normalizeCssValue(h, canvasWidth)}
                 }
             }
-
             return acc;
         }, {});
 
@@ -244,7 +245,6 @@ class ScfBorder {
             shadowColor,
             patternColor
         } = pp;
-
 
         // prepare outline
         const borderPath = this.borderPath(size, {...pp});
