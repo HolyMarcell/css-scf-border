@@ -3,7 +3,7 @@
   "author": "HolyMarcell <tristan.doehl@holy-mail.de>",
   "homepage": "https://holymarcell.github.io/css-scf-border/",
   "repository": "https://github.com/HolyMarcell/css-scf-border",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "scripts": {
     "start": "snowpack dev",
