@@ -7,10 +7,6 @@ export const Explanation = () => {
       <div className={'content--left'}>
         <pre>
           {"&__leftmain {\n" +
-          "  width: 100%;\n" +
-          "  height: 100%;\n" +
-          "  box-sizing: border-box;\n" +
-          "  padding: 20px 20px 20px 60px;\n" +
           "\n" +
           "  --scfborder-top-left: 20px 70px;\n" +
           "  --scfborder-top-right: 20;\n" +
@@ -30,13 +26,6 @@ export const Explanation = () => {
       <div className={'content--right'}>
         <pre>
           {"    &__rightmain {\n" +
-          "      width: 100%;\n" +
-          "      height: 100%;\n" +
-          "      box-sizing: border-box;\n" +
-          "      display: flex;\n" +
-          "      align-items: center;\n" +
-          "      justify-content: center;\n" +
-          "\n" +
           "\n" +
           "      --scfborder-top-left: 20;\n" +
           "      --scfborder-top-right: 20px 70px;\n" +
