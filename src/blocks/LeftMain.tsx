@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export const LeftMain: React.FC = ({children}) => {
+export const LeftMain: React.FC<{children: React.ReactNode}> = ({children}) => {
 
 
   return (
